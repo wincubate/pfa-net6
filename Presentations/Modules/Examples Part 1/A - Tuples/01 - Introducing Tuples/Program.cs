@@ -10,23 +10,27 @@ namespace Wincubate.CS10.Part1.Slide05
             WriteLine("Please input a word: ");
             string input = ReadLine();
 
-            int vowels = FindVowels(input);
-            WriteLine($"There are {vowels} vowels in \"{input}\"");
+            var t = FindVowels(input);
+            WriteLine($"There are {t.vowels} vowels and {t.cons} consonants in \"{input}\"");
         }
 
-        static int FindVowels( string s )
+        static (int vowels, int cons) FindVowels( string s )
         {
-            int v = 0;
+            var tuple = (v: 0, c: 0);
 
             foreach (char letter in s)
             {
                 if (IsVowel(letter))
                 {
-                    v++;
+                    tuple.v++;
+                }
+                else if(char.IsDigit(letter) == false )
+                {
+                    tuple.c++;
                 }
             }
 
-            return v;
+            return tuple;
         }
 
         static bool IsVowel( char letter )
